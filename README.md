@@ -1,64 +1,64 @@
 # Script Security TeleBot
 
-Sebuah bot Telegram untuk memindai dan mendeteksi kode berbahaya dalam dokumen, khususnya berfokus pada file ZIP dan skrip shell.
+A Telegram bot to scan and detect malicious code in user uploaded files, especially ZIP files and shell scripts.
 
-## Memulai
+## Getting started
 
-### Prasyarat
+### Requirements
 
 - Python 3.x
-- Instal paket Python yang diperlukan dengan perintah:
+- Install the required dependency with this command:
   ```bash
   pip install python-telegram-bot==13.15
   ```
 
-### Instalasi
+### Installation
 
-1. Klon repositori:
+1. Clone the repository:
    ```bash
    git clone https://github.com/RiProG-id/Script-Security-TeleBot.git
    ```
 
-2. Masuk ke direktori proyek:
+2. Enter the project's directory:
    ```bash
    cd Script-Security-TeleBot
    ```
 
-3. Instal dependensi:
+3. Install dependencies:
    ```bash
    pip install -r requirements.txt
    ```
 
-4. Gantilah `'BOT_TOKEN_ANDA'` di `main.py` dengan token bot Telegram yang sesuai.
+4. Replace `'BOT_TOKEN_ANDA'` in `main.py` with your Telegram bot token.
 
-5. Jalankan bot:
+5. Run the bot:
    ```bash
    python main.py
    ```
 
-## Perintah Bot
+## Bot command
 
-- `/start`: Memulai bot dan menerima pesan selamat datang beserta tautan kode sumber.
-- Mengirim dokumen (ZIP atau skrip shell) memicu bot untuk memindai kode berbahaya.
+- `/start`: Start the bot, sends a welcome message along with the source code link.
+- Sending a document (ZIP or script shell) will trigger the bot to scan for malicious code.
 
-## Cara Kerja
+## How it works
 
-- Bot memindai file ZIP untuk menemukan kode berbahaya dalam file-file di dalamnya.
-- Bot memeriksa skrip shell untuk perintah dan pola yang dianggap berisiko.
+- The bot scans the ZIP file to find malicious code in the files inside.
+- The bot checks the shell script for commands and patterns deemed hazardous. 
 
-## Kode Berbahaya yang Dideteksi
+## Hazardous code detected
 
-Bot mendeteksi pola berbahaya berikut dalam dokumen:
+The bot scans for the following harmful codes:
 
-- `rm -rf`: Perintah hapus paksa secara rekursif.
-- `if=/dev/null`: Redireksi input ke perangkat null.
-- `if=/dev/zero`: Redireksi input ke perangkat zero.
-- `cmd erase`: Perintah Windows untuk menghapus file.
-- `apparmor`: Kerangka keamanan untuk Linux.
-- `setenforce`: Perintah Linux untuk mengatur mode penegakan.
-- `shred -f`: Menghapus dan mengganti isi file dengan aman.
-- `ufw disable`: Menonaktifkan Uncomplicated Firewall di Linux.
-- `iptables -F`: Menghapus semua aturan iptables di Linux.
-- `setfacl`: Mengatur daftar kontrol akses file di Linux.
-- `/proc/sysrq_trigger`: Memicu aksi pada kernel Linux melalui `/proc/sysrq_trigger`.
-- `:(){ :|:& };:`: Bom fork, sebuah fungsi shell berbahaya.
+- `rm -rf`: Force recursive deletion.
+- `if=/dev/null`: Redirect input to null.
+- `if=/dev/zero`: Redirect input to zero.
+- `cmd erase`: Windows command to delete files.
+- `apparmor`: A security framework for Linux.
+- `setenforce`: Set the enforcement state for SELinux.
+- `shred -f`: Shred the files.
+- `ufw disable`: Disable Uncomplicated Firewall on Linux.
+- `iptables -F`: Flush all iptables rules on Linux.
+- `setfacl`: Set file access control on Linux.
+- `/proc/sysrq_trigger`: Triggering action on the Linux kernel through `/proc/sysrq_trigger`.
+- `:(){ :|:& };:`: Bomb fork, a dangerous shell function.
