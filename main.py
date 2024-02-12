@@ -14,7 +14,7 @@ for filename in os.listdir(directory):
 TOKEN = 'PLACE_BOT_TOKEN_HERE'
 
 def start(update: Update, context: CallbackContext) -> None:
-    update.message.reply_text('hewwo, thanks for starting the bot\nsource code: https://github.com/fukiame/kagami', disable_web_page_preview=True)
+    update.message.reply_text('hewwo, im online ig')
 
 def welcome(update: Update, context: CallbackContext) -> None:
     if update.message.new_chat_members:
@@ -98,7 +98,7 @@ def handle_document(update: Update, context: CallbackContext) -> None:
             if result:
                 update.message.reply_text(result)
             else:
-                update.message.reply_text('[i] didnt find any sus code, the file is safe, probably?.')
+                update.message.reply_text('[i] didnt find any sus code, i guess')
     else:
         pass
 
