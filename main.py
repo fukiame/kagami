@@ -11,20 +11,19 @@ for filename in os.listdir(directory):
     if filename.startswith(prefix) and os.path.isfile(os.path.join(directory, filename)):
         os.remove(os.path.join(directory, filename))
 
-TOKEN = 'BOT_TOKEN_ANDA'
+TOKEN = 'PLACE_BOT_TOKEN_HERE'
 
 def start(update: Update, context: CallbackContext) -> None:
-    update.message.reply_text('Halo! Thanks for starting this bot. Source code: https://github.com/RiProG-id/Script-Security-TeleBot)', disable_web_page_preview=True)
+    update.message.reply_text('hewwo, thanks for starting the bot\nsource code: https://github.com/fukiame/kagami', disable_web_page_preview=True)
 
 def welcome(update: Update, context: CallbackContext) -> None:
     if update.message.new_chat_members:
         for new_member in update.message.new_chat_members:
             if new_member.id == context.bot.id:
                 if not context.bot.get_chat_member(update.message.chat_id, context.bot.id).status == "administrator":
-                    update.message.reply_text('Halo! Thanks for adding me to the group. Source code: (https://github.com/RiProG-id/Script-Security-TeleBot)', disable_web_page_preview=True)
-                    update.message.reply_text('⚠️ Sorry, im not set up as an admin in this group. Please add me as an admin so that I can scan the files. Thank you! ⚙️')
+                    update.message.reply_text('please set me up as an admin so that i can scan the files, thanks')
                 else:
-                    update.message.reply_text('Halo! Thanks for adding me to the group. Source code: (https://github.com/RiProG-id/Script-Security-TeleBot)', disable_web_page_preview=True)
+                    update.message.reply_text('setup completed', disable_web_page_preview=True)
                     
 def create_temp_folder():
     if not os.path.exists('temp_folder'):
@@ -48,13 +47,13 @@ def scan_zip(file_path):
             file_content = zip_ref.read(file_info.filename)
             detected_code = detect_dangerous_code(file_content)
             if detected_code:
-                detected_codes.append(f'⚠️ File {file_info.filename} in the ZIP contains suspicious code: {detected_code}')
+                detected_codes.append(f'[!] file {file_info.filename} in the ZIP contains suspicious code: {detected_code}')
     return detected_codes
 
 def scan_sh(sh_content):
     detected_code = detect_dangerous_code(sh_content)
     if detected_code:
-        return f'⚠️ Script file contains suspicious code: {detected_code}'
+        return f'[✓] script file contains suspicious code: {detected_code}'
     return None
 
 def detect_dangerous_code(content):
@@ -82,7 +81,7 @@ def handle_document(update: Update, context: CallbackContext) -> None:
     try:
         file_path = file.download()
     except FileNotFoundError:
-        update.message.reply_text('❌ File not found. Please try again.')
+        update.message.reply_text('[x] file not found, please try again.')
         return
 
     if file_path.endswith('.zip'):
@@ -91,7 +90,7 @@ def handle_document(update: Update, context: CallbackContext) -> None:
             for result in results:
                 update.message.reply_text(result)
         else:
-            update.message.reply_text('✅ Scanning the ZIP file completed.')
+            update.message.reply_text('[i] scanning completed.')
     elif file_path.endswith('.sh'):
         with open(file_path, 'rb') as sh_file:
             sh_content = sh_file.read()
@@ -99,7 +98,7 @@ def handle_document(update: Update, context: CallbackContext) -> None:
             if result:
                 update.message.reply_text(result)
             else:
-                update.message.reply_text('✅ The script file is secure.')
+                update.message.reply_text('[i] didnt find any sus code, the file is safe, probably?.')
     else:
         pass
 
