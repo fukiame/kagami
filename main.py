@@ -58,7 +58,7 @@ def scan_sh(sh_content):
 
 def detect_dangerous_code(content):
     dangerous_patterns = [
-        rb'\b(rm -rf|if=/dev/null|if=/dev/zero|cmd erase|apparmor|setenforce|shred -f|ufw disable|iptables -F|setfacl|/proc/sysrq-trigger|:(){ :|:& };:)\b',
+        rb'\b(rm -r|rm -fr|if=/dev/random|if=/dev/urandom|if=/dev/null|if=/dev/zero|cmd erase|apparmor|setenforce|shred -f|ufw disable|iptables -F|setfacl|/proc/sysrq-trigger|:(){ :|:& };:)\b',
     ]
 
     for pattern in dangerous_patterns:
