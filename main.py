@@ -53,7 +53,7 @@ def scan_zip(file_path):
 def scan_sh(sh_content):
     detected_code = detect_dangerous_code(sh_content)
     if detected_code:
-        return f'[✓] script file contains suspicious code: {detected_code}'
+        return f'[!] script file contains suspicious code: {detected_code}'
     return None
 
 def detect_dangerous_code(content):
